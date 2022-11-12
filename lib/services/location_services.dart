@@ -6,10 +6,10 @@ import 'package:node_auth_with_flutter/utils/constants.dart';
 import 'dart:developer';
 
 class LocationService {
-  final key = 'AIzaSyCmNJ9yA30OpBoQvdcPWz4wqr6srP0JeQM';
+  // final key = 'AIzaSyCmNJ9yA30OpBoQvdcPWz4wqr6srP0JeQM';
   Future<String> getPlaceId(String input) async {
     final url =
-        'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=$input&inputtype=textquery&key=AIzaSyCmNJ9yA30OpBoQvdcPWz4wqr6srP0JeQM';
+        'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=$input&inputtype=textquery&key=${Constants.googleApiKey}';
 
     var response = await http.get(Uri.parse(url));
 
@@ -25,7 +25,7 @@ class LocationService {
   Future<Map<String, dynamic>> getPlace(String input) async {
     final placeId = await getPlaceId(input);
     final url =
-        'https://maps.googleapis.com/maps/api/place/details/json?&place_id=$placeId&key=$key';
+        'https://maps.googleapis.com/maps/api/place/details/json?&place_id=$placeId&key=${Constants.googleApiKey}';
 
     var response = await http.get(Uri.parse(url));
 
@@ -39,7 +39,7 @@ class LocationService {
   Future<Map<String, dynamic>> getDirection(
       String origin, String destination) async {
     final url =
-        'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=AIzaSyCmNJ9yA30OpBoQvdcPWz4wqr6srP0JeQM';
+        'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=${Constants.googleApiKey}';
     var response = await http.get(Uri.parse(url));
     var json = convert.jsonDecode(response.body);
 
